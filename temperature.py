@@ -73,14 +73,14 @@ def breath_color(color, actual_time):
         color_picker = ilde
 
     # Night mode 12AM to 7AM turning off ligths
-    if actual_time > 0 and actual_time < 7 and color != "red":
-        pixels.fill(color_picker)
-        pixels.show() 
+    if actual_time >= 0 and actual_time < 7 and color != "red":
+        pixels.fill(ilde)
+        pixels.show()
 
     # Turn ON ligths 
     else:
         # Range +
-        for x in range(5, 100, 1):
+        for x in range(0, 100, 1):
             pixels.fill(color_picker)
             pixels.brightness = x/1000
             pixels.show()
@@ -105,11 +105,9 @@ while True:
     if cpu.temperature > 45:
         GPIO.output(RELAIS_1_GPIO, GPIO.HIGH) # on
         breath_color("red", now.hour)
-
+        time.sleep(10)
     else:
         print(now)
         GPIO.output(RELAIS_1_GPIO, GPIO.LOW) 
         breath_color("orange", now.hour)
-
- 
-        
+        time.sleep(5)
